@@ -83,4 +83,15 @@ interface NotesDao {
         }
         return id
     }
+
+    /**
+     * Backup import. Runs as one transaction so a failure part-way (bad row, crash, full disk)
+     * rolls back and the notes that were there before are untouched. With [replace] the existing
+     * notes are deleted inside the same transaction, so "Replace" can never leave the DB empty.
+     */
+    @Transaction
+    suspend fun importAll(notes: List<Pair<NoteEntity, List<ChecklistItemEntity>>>, replace: Boolean) {
+        if (replace) deleteAllNotes()
+        for ((note, items) in notes) upsert(note.copy(id = 0), items)
+    }
 }

@@ -65,25 +65,23 @@ class NotesRepository(private val context: Context, private val dao: NotesDao) {
         refreshWidget()
     }
 
-    /** Used by backup import. */
+    /** Backup import, "Replace" mode. Atomic: either every note lands or nothing changes. */
     suspend fun replaceAll(notes: List<Note>) {
-        dao.deleteAllNotes()
-        notes.forEach { insertRaw(it) }
+        dao.importAll(notes.map { it.toImportRow() }, replace = true)
         refreshWidget()
     }
 
+    /** Backup import, "Merge" mode. Atomic for the same reason. */
     suspend fun importMerge(notes: List<Note>) {
-        notes.forEach { insertRaw(it) }
+        if (notes.isEmpty()) return
+        dao.importAll(notes.map { it.toImportRow() }, replace = false)
         refreshWidget()
     }
 
-    private suspend fun insertRaw(note: Note) {
-        val entity = note.copy(id = 0).toEntity()
-        val items = note.items.mapIndexed { index, item ->
+    private fun Note.toImportRow(): Pair<NoteEntity, List<ChecklistItemEntity>> =
+        copy(id = 0).toEntity() to items.mapIndexed { index, item ->
             ChecklistItemEntity(noteId = 0, text = item.text, isChecked = item.isChecked, position = index)
         }
-        dao.upsert(entity, items)
-    }
 
     private suspend fun refreshWidget() {
         runCatching { NotesWidget().updateAll(context) }
