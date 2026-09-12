@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Lets system backup (Seedvault on GrapheneOS, or device-to-device transfer) carry the notes
+  database along. Nothing here talks to any network; it only declares what a backup agent may copy.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="database" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="database" path="." />
+    </device-transfer>
+</data-extraction-rules>

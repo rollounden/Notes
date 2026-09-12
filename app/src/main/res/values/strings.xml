@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="app_description">Private, local-only notes with checklists, Markdown and backups.</string>
+    <string name="widget_label">Notes</string>
+    <string name="widget_description">Pinned notes at a glance, plus a shortcut to jot something down.</string>
+</resources>

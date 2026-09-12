@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon / monochrome layer (solid silhouette, alpha-only). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Page body -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M36,30 h24 l14,14 v32 a3,3 0 0 1 -3,3 h-35 a3,3 0 0 1 -3,-3 v-43 a3,3 0 0 1 3,-3 z" />
+    <!-- Cut-out text lines -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M43,52 h22 v4 h-22 z M43,61 h22 v4 h-22 z M43,70 h13 v4 h-13 z" />
+    <!-- Folded corner cut-out -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M60,30 l14,14 h-14 z" />
+</vector>
